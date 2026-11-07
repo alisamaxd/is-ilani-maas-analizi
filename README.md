@@ -8,7 +8,7 @@ Ekip: (buraya ekip üyelerinin isimlerini ekleyin)
 
 ## Ana sonuç
 
-2.499 ilan üzerinde 5 katlı × 4 tekrar çapraz doğrulama (toplam 20 deneme). Hedef: yıllık maaş (USD). Model: log(maaş) üzerinde doğrusal regresyon.
+2.499 ilan üzerinde 5 katlı × 4 tekrar çapraz doğrulama (toplam 20 deneme). Hedef: veri setindeki `normalized_salary` sütunu (USD). Model: log(maaş) üzerinde doğrusal regresyon.
 
 | Model | Girdi | MAE (ortalama) | R² (ortalama) |
 |---|---|---|---|
@@ -86,15 +86,19 @@ $env:ANTHROPIC_API_KEY="anahtarınız"             # Windows PowerShell
 
 `data/llm_cikti.jsonl` repoda olduğu için 4. adım atlanabilir: 1, 2, 3, 5 ve 6. adımları çalıştırmanız yeterlidir. 2. adım aynı tohumla çalışır; farklı bir pandas sürümünde örneklem değişirse `llm_cikti.jsonl` içindeki bazı ilanlar eşleşmeyebilir, bu durumda 05 ve 07 yalnızca ortak ilanlarla çalışır. Eşleşmeyen ilanlar için 4. adımı API anahtarıyla çalıştırabilirsiniz.
 
-## Sınırlılıklar
+## Kapsam ve gelecek çalışma
 
-- Veri ABD piyasasına aittir (maaşlı ilanların %99,96'sı USD). Bulgular Türkiye'ye genellenemez.
-- Veri neredeyse tamamen iş ilanıdır, staj ilanı yaklaşık %1'dir.
-- Modelde iş unvanı ve sektör bilerek kullanılmamıştır; beceri katsayıları nedensellik göstermez.
-- LLM çıktısının doğruluğu elle ölçülmemiştir (precision / recall hesaplanmadı). LLM'in üstünlüğünün nedeni bilinmemektedir.
-- Anahtar kelime listesi bizim yazdığımız basit bir listedir; daha iyi desenlerle fark küçülebilir.
-- Tek örneklem, tek LLM, tek prompt. LLM çıktısı yeniden çalıştırmada değişebilir.
-- `normalized_salary` içindeki saatlik-yıllık dönüşümü doğrulamadık.
+**Kapsam**
+
+- Veri ABD piyasasına aittir (maaşlı ilanların %99,96'sı USD), bulgular bu piyasa için geçerlidir. Veri neredeyse tamamen iş ilanlarından oluşur.
+- Beceri katsayıları ilişki gösterir, nedensellik değil. İş unvanı ve sektör, becerilerin katkısını gizlemesin diye modele bilerek eklenmemiştir.
+- Sonuçlar tek örneklem (2.499 ilan), tek LLM ve tek prompt ile elde edilmiştir. Anahtar kelime yöntemi, bizim yazdığımız basit bir beceri listesine dayanır.
+
+**Gelecek çalışma**
+
+- LLM çıktısının elle doğrulanması (precision / recall) ve LLM'in küçük üstünlüğünün kaynağının incelenmesi.
+- Unvan veya sektör kontrolüyle beceri katsayılarının yeniden tahmini.
+- Farklı LLM'ler, promptlar ve daha gelişmiş anahtar kelime desenleriyle karşılaştırma.
 
 ## Yapay zeka kullanımı
 
