@@ -1,0 +1,6 @@
+data/*
+!data/llm_cikti.jsonl
+.env
+__pycache__/
+.venv/
+.DS_Store
